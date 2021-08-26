@@ -1,6 +1,5 @@
 package hospital_management;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
 		if (option == 1) {
 			setDetailsOptions();
 		} else if (option == 2) {
-			getPatientDetails();
+			getDetailsOptions();
 		} else {
 			System.out.println("Enter a valid option");
 			optionsMain();
@@ -21,16 +20,25 @@ public class Main {
 	}
 
 	void setDetailsOptions() {
-		System.out.println("1. book appointment for new patient");
-		System.out.println("2. book appointment for Existing patient");
-		System.out.println("3. enter consultation information");
+		System.out.println("1. Entry new patient");
+		System.out.println("2. Book appointment for Existing patient");
+		System.out.println("3. Enter consultation information");
 		Scanner sc = new Scanner(System.in);
 		int option = sc.nextInt();
-
+		
 		switch (option) {
 		case 1:
 			setPatientDetails();
-
+			exit();
+			break;
+			
+		case 2:
+			setAppointmentDetails();
+			exit();
+			break;
+			
+		case 3:
+			setConsultationDetails();
 			break;
 
 		default:
@@ -56,6 +64,7 @@ public class Main {
 		switch (option) {
 		case 1:
 			getPatientDetails();
+			exit();
 			break;
 
 		default:
@@ -67,50 +76,36 @@ public class Main {
 	}
 
 	void setPatientDetails() {
-		Scanner sc = new Scanner(System.in);
-
-		System.out.print("Enter patient Id : ");
-		int patientId = sc.nextInt();
-		if (patientId > 399999 && patientId < 500000) {
-			System.out.print("Enter patient name : ");
-			String patientName = sc.nextLine();
-			if (patientName != null && !patientName.isEmpty()) {
-				System.out.print("Enter patient DOB : ");
-				String patientDob = sc.next();
-				if (patientDob != null && !patientDob.isEmpty()) {
-					System.out.print("Enter patient phone number : ");
-					String patientPhoneNumber = sc.next();
-					if (patientPhoneNumber != null && !patientPhoneNumber.isEmpty()
-							&& patientPhoneNumber.length() == 10) {
-						System.out.print("Enter patient location : ");
-						String patientAddress = sc.next();
-						if (patientAddress != null && !patientAddress.isEmpty()) {
-							System.out.print("Enter patient type : ");
-							String patientType = sc.nextLine();
-							if (patientType.equalsIgnoreCase("in patient") ||patientType.equalsIgnoreCase("out patient") ) {
-								Process process = new Process();
-								process.setPatientDetails(patientId, patientName, patientDob, patientPhoneNumber,
-										patientAddress, patientType);
-							} else {
-								System.out.println("please enter a vaid patient type");
-							}
-						} else {
-							System.out.println("please enter a valid patient address");
-						}
-					} else {
-						System.out.println("please enter a vaild patient phone number");
-					}
-				} else {
-					System.out.println("please enter a valid patient dob");
-				}
-			} else {
-				System.out.println("please enter a vaid patient name");
-				exit();
-			}
-		} else {
-			System.out.println("please enter a valid patient id");
-			exit();
-		}
+		PatientValidate patientValidate=new PatientValidate();
+		patientValidate.setPatientid();
+		patientValidate.setPatientName();
+		patientValidate.setPatientDob();
+		patientValidate.setPatientPhoneNumber();
+		patientValidate.setPatientAddress();
+		patientValidate.setPatientType();
+		new Patient(patientValidate);
+	}
+	
+	void setAppointmentDetails() {
+		AppointmentValidate appointmentValidate=new AppointmentValidate();
+		appointmentValidate.setPatientId();
+		appointmentValidate.setDateOfVisit();
+		appointmentValidate.setPurposeOfVisit();
+		appointmentValidate.setPatientBp();
+		appointmentValidate.setPatientTemperature();
+		appointmentValidate.setDoctorToVisit();
+		new Appointment(appointmentValidate);
+	}
+	
+	void setConsultationDetails(){
+		ConsultationValidation consultationValidation=new ConsultationValidation();
+		consultationValidation.setPatientVisitid();
+		consultationValidation.setPatientId();
+		consultationValidation.setDoctorId();
+		consultationValidation.setDoctorRecommendation();
+		consultationValidation.setMedicineId();
+		consultationValidation.setFollowUpNeeded();
+		new Consultation(consultationValidation);
 	}
 
 	void getPatientDetails() {
@@ -120,8 +115,8 @@ public class Main {
 		System.out.println("Enter you Patient Id :");
 		int patientId = sc.nextInt();
 		if (patientName != null && !patientName.isEmpty() && patientId > 399999 && patientId < 500000) {
-			DataStorage patient = new DataStorage();
-			patient.showPatientDetails(patientId, patientName);
+			Report report = new Report();
+			report.showPatientDetails(patientId, patientName);
 		} else {
 			System.out.println("Enter a vaid details");
 		}
