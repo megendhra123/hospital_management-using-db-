@@ -12,6 +12,9 @@ public class Consultation {
 		Connection connection = dataBase.getConnection();
 		if (connection != null) {
 			try {
+				Statement statement = connection.createStatement();
+				ResultSet resultSet=statement.executeQuery("select *from appointment where PATIENT_ID = "+consultationValidation.patientId+" AND DATE_OF_VISIT = (select CURDATE() as TODAY)");
+				if(resultSet.isBeforeFirst()==true) {
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("insert into consultationInformation values(?,?,?,?,?,?)");
 				preparedStatement.setInt(1, consultationValidation.getPatientVisitid());
@@ -22,6 +25,9 @@ public class Consultation {
 				preparedStatement.setString(6, consultationValidation.getFollowUpNeeded());
 				preparedStatement.executeUpdate();
 				System.out.println("Consultation details inserted successfully");
+				}else {
+					System.out.println("The patient does not have appointment for today");
+				}
 			} catch (SQLException e) {
 				if(e.getErrorCode()==1062) {
 					System.out.println("The patient is already visted");

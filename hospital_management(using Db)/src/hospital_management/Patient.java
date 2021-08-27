@@ -21,6 +21,9 @@ public class Patient {
 				preparedStatement.executeUpdate();
 				System.out.println("Patient details inserted successfully");
 			} catch (SQLException e) {
+				if(e.getErrorCode()==1062) {
+					System.out.println("The patient details already exisits");
+				}
 				System.out.println("Failed to insert details");
 				System.out.println("ERROR : " + e.getMessage() + "\nERROR CODE : " + e.getErrorCode());
 			} finally {

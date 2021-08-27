@@ -10,21 +10,6 @@ public class ConsultationValidation {
 	int medicineId;
 	String followUpNeeded;
 
-	public void setPatientVisitid() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter Visit Id : ");
-		int visitId = sc.nextInt();
-		if (visitId > 499) {
-			this.visitId = visitId;
-		} else {
-			System.out.println("Enter a valid visit id ");
-			setPatientVisitid();
-		}
-	}
-
-	public int getPatientVisitid() {
-		return this.visitId;
-	}
 
 	public void setPatientId() {
 		Scanner sc = new Scanner(System.in);
@@ -40,6 +25,22 @@ public class ConsultationValidation {
 
 	public int getPatientId() {
 		return this.patientId;
+	}
+	
+	public void setPatientVisitid() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Visit Id : ");
+		int visitId = sc.nextInt();
+		if (visitId > 499) {
+			this.visitId = visitId;
+		} else {
+			System.out.println("Enter a valid visit id ");
+			setPatientVisitid();
+		}
+	}
+
+	public int getPatientVisitid() {
+		return this.visitId;
 	}
 
 	public void setDoctorId() {

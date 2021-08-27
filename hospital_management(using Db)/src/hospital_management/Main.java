@@ -66,6 +66,14 @@ public class Main {
 			getPatientDetails();
 			exit();
 			break;
+			
+		case 2:
+			getPatientListOfVisit();
+			exit();
+			break;
+			
+		case 3:
+			getDateRangeVisitList();
 
 		default:
 			System.out.println("Enter a valid option");
@@ -119,6 +127,32 @@ public class Main {
 			report.showPatientDetails(patientId, patientName);
 		} else {
 			System.out.println("Enter a vaid details");
+		}
+	}
+	
+	void getPatientListOfVisit(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter you Patient Id :");
+		int patientId = sc.nextInt();
+		if ( patientId > 399999 && patientId < 500000) {
+			Report report = new Report();
+			report.showPatientListOfVisit(patientId);
+		} else {
+			System.out.println("Enter a vaid details");
+		}
+	}
+	
+	void getDateRangeVisitList() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Date from(yyyy/MM/dd) :");
+		String fromDate = sc.next();
+		System.out.println("Date to(yyyy/MM/dd) :");
+		String toDate = sc.next();
+		if(DateValidate.dateValidate(fromDate) && DateValidate.dateValidate(toDate)) {
+			Report report = new Report();
+			report.showDateRangeVisitDetails(fromDate, toDate);
+		}else {
+			System.out.println("Enter a vaild date formate");
 		}
 	}
 
