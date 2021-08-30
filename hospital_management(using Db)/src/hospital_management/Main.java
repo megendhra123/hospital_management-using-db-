@@ -74,6 +74,33 @@ public class Main {
 			
 		case 3:
 			getDateRangeVisitList();
+			exit();
+			break;
+			
+		case 4:
+			getFollowUpNeededPatient();
+			exit();
+			break;
+			
+		case 5:
+			getListOfPatientByDoctorId();
+			exit();
+			break;
+			
+		case 6:
+			getListOfInPatient();
+			exit();
+			break;
+		
+		case 7:
+			getListOfOutPatient();
+			exit();
+			break;
+			
+		case 8:
+			getTodayVisitPatientList();
+			exit();
+			break;
 
 		default:
 			System.out.println("Enter a valid option");
@@ -123,8 +150,7 @@ public class Main {
 		System.out.println("Enter you Patient Id :");
 		int patientId = sc.nextInt();
 		if (patientName != null && !patientName.isEmpty() && patientId > 399999 && patientId < 500000) {
-			Report report = new Report();
-			report.showPatientDetails(patientId, patientName);
+			new Report().showPatientDetails(patientId, patientName);
 		} else {
 			System.out.println("Enter a vaid details");
 		}
@@ -135,8 +161,7 @@ public class Main {
 		System.out.println("Enter you Patient Id :");
 		int patientId = sc.nextInt();
 		if ( patientId > 399999 && patientId < 500000) {
-			Report report = new Report();
-			report.showPatientListOfVisit(patientId);
+			new Report().showPatientListOfVisit(patientId);
 		} else {
 			System.out.println("Enter a vaid details");
 		}
@@ -149,13 +174,36 @@ public class Main {
 		System.out.println("Date to(yyyy/MM/dd) :");
 		String toDate = sc.next();
 		if(DateValidate.dateValidate(fromDate) && DateValidate.dateValidate(toDate)) {
-			Report report = new Report();
-			report.showDateRangeVisitDetails(fromDate, toDate);
+			new Report().showDateRangeVisitDetails(fromDate, toDate);
 		}else {
 			System.out.println("Enter a vaild date formate");
 		}
 	}
-
+	
+	void getFollowUpNeededPatient() {
+		new Report().showFollowUpNeededPatient();
+	}
+	
+	void getListOfPatientByDoctorId(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter you Patient Id :");
+		int doctorId = sc.nextInt();
+		if ( doctorId > 29999 && doctorId < 399999) {
+			new Report().showListOfPatientByDoctorId(doctorId);
+		} else {
+			System.out.println("Enter a vaid details");
+		}
+	}
+	
+	void getListOfInPatient() {
+		new Report().showTypePatientList("IN PATIENT");
+	}
+	void getListOfOutPatient() {
+		new Report().showTypePatientList("OUT PATIENT");
+	}
+	void getTodayVisitPatientList(){
+		new Report().showTodayVisitPatientList();
+	}
 	void exit() {
 		System.out.println("Press any key then press enter to exit");
 		Scanner sc = new Scanner(System.in);
