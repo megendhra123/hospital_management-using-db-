@@ -39,6 +39,7 @@ public class Main {
 			
 		case 3:
 			setConsultationDetails();
+			exit();
 			break;
 
 		default:

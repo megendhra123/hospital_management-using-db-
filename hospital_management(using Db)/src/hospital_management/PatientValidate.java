@@ -44,7 +44,7 @@ public class PatientValidate {
 
 	public void setPatientDob() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter patient Dob : ");
+		System.out.println("Enter patient Dob(yyyy/MM/dd) : ");
 		String patiebtDob = sc.nextLine();
 		if (DateValidate.dateValidate(patiebtDob)) {
 			this.patientDob = patiebtDob;
